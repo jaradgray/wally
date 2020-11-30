@@ -51,6 +51,9 @@ public class SettingsManager {
 	public String[] getUnshownPaths() {
 		// Get all paths in root directory
 		String[] allPaths = getImagePathsInRootDir();
+		
+		// If there are no images in the Wally directory, return an empty array
+		if (allPaths.length == 0) return allPaths;
 				
 		// Get list of shown paths
 		JSONArray shownPaths = mSettingsObj.getJSONArray(KEY_SHOWN_PATHS_LIST);
@@ -94,7 +97,7 @@ public class SettingsManager {
 			int index = 0;
 			for (int i = 0; i < allPaths.length; i++) {
 				String path = allPaths[i];
-				if (path.equals(lastPath) && allPaths.length > 1) continue;
+				if (path.equals(lastPath)) continue;
 				result[index++] = path;
 			}
 			return result;
