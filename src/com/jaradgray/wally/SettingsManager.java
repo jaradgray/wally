@@ -79,8 +79,11 @@ public class SettingsManager {
 		}
 		
 		// If unshownPaths is empty, we've shown every image in the Wally
-		//	directory, so we:
-		//		- clear the "shown_paths" entry in the settings file
+		//	directory with no repetitions, so now we can "reset" and show
+        //  any path in the Wally directory, except for the last shown path
+        //  (because we'll assume it's currently showing):
+		//		- "reset" by clearing the "shown_paths" entry in the settings
+        //          file
 		//		- return an array containing all paths in the root
 		//			directory, minus the last selected path
 		if (unshownPaths.isEmpty()) {
