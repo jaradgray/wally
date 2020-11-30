@@ -69,13 +69,17 @@ public class Wally {
 	};
 	
 	public void start() {
-		// TODO
+		// Pick a random time between persisted min and max intervals
+		SettingsManager manager = new SettingsManager();
+		long min = manager.getMinSeconds();
+		long max = manager.getMaxSeconds();
+		int i = mRandom.nextInt((int)(max - min) + 1);
+		long seconds = i + min;
 		
-		// Get the persisted min and max intervals from the settings file
-		
-		// Pick a random time between min and max
+		String log = "Min:\t" + min + "\nMax:\t" + max + "\nRandom:\t" + seconds + "\n";
+		System.out.println(log);
 		
 		// Schedule mRunnable to run at the selected time
-		mScheduler.schedule(mRunnable, 0, TimeUnit.SECONDS);
+		mScheduler.schedule(mRunnable, seconds, TimeUnit.SECONDS);
 	}
 }
