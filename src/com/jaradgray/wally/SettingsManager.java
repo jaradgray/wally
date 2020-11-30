@@ -94,7 +94,7 @@ public class SettingsManager {
 			int index = 0;
 			for (int i = 0; i < allPaths.length; i++) {
 				String path = allPaths[i];
-				if (path.equals(lastPath)) continue;
+				if (path.equals(lastPath) && allPaths.length > 1) continue;
 				result[index++] = path;
 			}
 			return result;
