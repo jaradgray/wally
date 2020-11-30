@@ -17,14 +17,15 @@ public class Wally {
 			// Get a random unshown path
 			String[] paths = manager.getUnshownPaths();
 			
-			String log = "Unshown paths:\n";
-			for (String s : paths) log += s + "\n";
+			String log1 = "Unshown paths:\n";
+			for (String s : paths) log1 += s + "\n";
+			System.out.println(log1);
 			
 			int index = mRandom.nextInt(paths.length);
 			String path = paths[index];
 			
-			log += "\nSelected path:\n" + path;
-			System.out.println(log);
+			String log2 = "\nSelected path:\n" + path;
+			System.out.println(log2);
 			
 			// Set wallpaper to the selected path
 			mWallpaperManager.setWallpaper(path);
