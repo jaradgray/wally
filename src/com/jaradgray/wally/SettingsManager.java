@@ -108,10 +108,8 @@ public class SettingsManager {
 		// Add given path to mSettingsObj's "shown_paths" entry
 		JSONArray shownPaths = mSettingsObj.getJSONArray(KEY_SHOWN_PATHS_LIST);
 		shownPaths.put(path);
-		
 		// Update mSettingsObj's "last_shown_path" entry
 		mSettingsObj.put(KEY_LAST_SHOWN_PATH, path);
-		
 		// Write mSettingsObj to settings file
 		writeSettingsFile(mSettingsObj);
 	}
