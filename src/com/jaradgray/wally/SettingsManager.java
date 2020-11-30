@@ -82,10 +82,19 @@ public class SettingsManager {
 		//	directory, so we:
 		//		- clear the "shown_paths" entry in the settings file
 		//		- return an array containing all paths in the root
-		//			directory, except for the last selected path
+		//			directory, minus the last selected path
 		if (unshownPaths.isEmpty()) {
 			clearShownPaths();
-			return allPaths;
+			// Build the array of all paths minus the last selected path
+			String lastPath = mSettingsObj.getString(KEY_LAST_SHOWN_PATH);
+			String[] result = new String[allPaths.length - 1];
+			int index = 0;
+			for (int i = 0; i < allPaths.length; i++) {
+				String path = allPaths[i];
+				if (path.equals(lastPath)) continue;
+				result[index++] = path;
+			}
+			return result;
 		}
 		
 		// Return resulting list as an array
@@ -96,6 +105,9 @@ public class SettingsManager {
 		// Add given path to mSettingsObj's "shown_paths" entry
 		JSONArray shownPaths = mSettingsObj.getJSONArray(KEY_SHOWN_PATHS_LIST);
 		shownPaths.put(path);
+		
+		// Update mSettingsObj's "last_shown_path" entry
+		mSettingsObj.put(KEY_LAST_SHOWN_PATH, path);
 		
 		// Write mSettingsObj to settings file
 		writeSettingsFile(mSettingsObj);
