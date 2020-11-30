@@ -116,6 +116,28 @@ public class SettingsManager {
 		writeSettingsFile(mSettingsObj);
 	}
 	
+	/**
+	 * Returns the number of seconds represented by the "min_interval" and
+	 * "min_interval_unit" values in the app's local settings file.
+	 * @return
+	 */
+	public long getMinSeconds() {
+		long min = mSettingsObj.getLong(KEY_MIN_INTERVAL);
+		String unit = mSettingsObj.getString(KEY_MIN_INTERVAL_UNIT);
+		return getSeconds(min, unit);
+	}
+	
+	/**
+	 * Returns the number of seconds represented by the "max_interval" and
+	 * "max_interval_unit" values in the app's local settings file.
+	 * @return
+	 */
+	public long getMaxSeconds() {
+		long min = mSettingsObj.getLong(KEY_MAX_INTERVAL);
+		String unit = mSettingsObj.getString(KEY_MAX_INTERVAL_UNIT);
+		return getSeconds(min, unit);
+	}
+	
 	
 	// Private methods
 	
@@ -197,5 +219,29 @@ public class SettingsManager {
 	private void clearShownPaths() {
 		mSettingsObj.put(KEY_SHOWN_PATHS_LIST, new JSONArray());
 		writeSettingsFile(mSettingsObj);
+	}
+	
+	/**
+	 * Returns the number of seconds represented by the given value
+	 * and unit.
+	 * @param value
+	 * @param unit
+	 * 				one of "s", "m", "h", "d"
+	 * @return
+	 */
+	private long getSeconds(long value, String unit) {
+		switch (unit) {
+			case "s":
+				return value;
+			case "m":
+				return value * 60;
+			case "h":
+				return value * 60 * 60;
+			case "d":
+				return value * 60 * 60 * 24;
+			default:
+				System.err.println("SettingsManager.getSeconds() - unrecognized unit: \"" + unit + "\"");
+				return -1;
+		}
 	}
 }
