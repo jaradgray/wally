@@ -23,9 +23,9 @@ public class SettingsManager {
 	public static final String KEY_LAST_SHOWN_PATH = "last_shown_path";
 	
 	public static final String DEFAULT_ROOT_DIR = "D:\\Jarad\\Pictures\\Wallpapers\\wally_dir";
-	public static final long DEFAULT_MIN_INTERVAL = 1;
+	public static final long DEFAULT_MIN_INTERVAL = 2;
 	public static final long DEFAULT_MAX_INTERVAL = 3;
-	public static final String DEFAULT_MIN_INTERVAL_UNIT = "m";
+	public static final String DEFAULT_MIN_INTERVAL_UNIT = "s";
 	public static final String DEFAULT_MAX_INTERVAL_UNIT = "h";
 	public static final String DEFAULT_LAST_SHOWN_PATH = DEFAULT_ROOT_DIR + File.separator + "kikuno.jpg";
 	
