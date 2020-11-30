@@ -21,6 +21,14 @@ public class Wally {
 			for (String s : paths) log1 += s + "\n";
 			System.out.println(log1);
 			
+			// Handle no unshown paths found
+			// If no unshown paths were found: don't change wallpaper,
+			//	and reschedule this Runnable
+			if (paths.length == 0) {
+				scheduleRunnable();
+				return;
+			}
+			
 			int index = mRandom.nextInt(paths.length);
 			String path = paths[index];
 			
@@ -33,21 +41,19 @@ public class Wally {
 			// Add selected path to the list of paths we've already shown
 			manager.addShownPath(path);
 			
-			// Pick a random time between min and max intervals
-			long min = manager.getMinSeconds();
-			long max = manager.getMaxSeconds();
-			int i = mRandom.nextInt((int)(max - min) + 1);
-			long seconds = i + min;
-			
-			String logg = "Min:\t" + min + "\nMax:\t" + max + "\nRandom:\t" + seconds + "\n";
-			System.out.println(logg);
-			
-			// Schedule this Runnable to be run again at the selected time
-			mScheduler.schedule(mRunnable, seconds, TimeUnit.SECONDS);
+			// Reschedule runnable
+			scheduleRunnable();
 		}
 	};
 	
 	public void start() {
+		scheduleRunnable();
+	}
+	
+	
+	// Private method
+	
+	private void scheduleRunnable() {
 		// Pick a random time between persisted min and max intervals
 		SettingsManager manager = new SettingsManager();
 		long min = manager.getMinSeconds();
