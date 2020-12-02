@@ -42,8 +42,10 @@ public class Wally {
 			// Add selected path to the list of paths we've already shown
 			manager.addShownPath(path);
 			
-			// Play a sound effect
-			mArp.play();
+			// Play a sound effect if sound is enabled
+			if (manager.isSoundEnabled()) {
+				mArp.play();
+			}
 			
 			// Reschedule runnable
 			scheduleRunnable();
