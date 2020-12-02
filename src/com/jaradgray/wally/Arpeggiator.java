@@ -52,6 +52,9 @@ public class Arpeggiator {
 			mNotesCount++;
 			if (mNotesCount < mNumNotes) {
 				mScheduler.schedule(mRunnable, MILLIS_PER_NOTE, TimeUnit.MILLISECONDS);
+			} else {
+				// Reset this Arpeggiator so play() can be called again
+				mNotesCount = 0;
 			}
 		}
 	};
