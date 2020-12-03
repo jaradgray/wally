@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Wally {
 	private final WallpaperManager mWallpaperManager = new WallpaperManager();
+	private Arpeggiator mArp = new Arpeggiator();
 	private final Random mRandom = new Random();
 	private final ScheduledExecutorService mScheduler = Executors.newScheduledThreadPool(1);
 	private final Runnable mRunnable = new Runnable() {
@@ -40,6 +41,11 @@ public class Wally {
 			
 			// Add selected path to the list of paths we've already shown
 			manager.addShownPath(path);
+			
+			// Play a sound effect if sound is enabled
+			if (manager.isSoundEnabled()) {
+				mArp.play();
+			}
 			
 			// Reschedule runnable
 			scheduleRunnable();

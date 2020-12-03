@@ -21,6 +21,7 @@ public class SettingsManager {
 	public static final String KEY_MAX_INTERVAL_UNIT = "max_interval_unit";
 	public static final String KEY_SHOWN_PATHS_LIST = "shown_paths";
 	public static final String KEY_LAST_SHOWN_PATH = "last_shown_path";
+	public static final String KEY_SOUND_ENABLED = "sound_on";
 	
 	public static final String DEFAULT_ROOT_DIR = "D:\\Jarad\\Pictures\\Wallpapers\\wally_dir";
 	public static final long DEFAULT_MIN_INTERVAL = 2;
@@ -28,6 +29,7 @@ public class SettingsManager {
 	public static final String DEFAULT_MIN_INTERVAL_UNIT = "s";
 	public static final String DEFAULT_MAX_INTERVAL_UNIT = "h";
 	public static final String DEFAULT_LAST_SHOWN_PATH = DEFAULT_ROOT_DIR + File.separator + "kikuno.jpg";
+	public static final boolean DEFAULT_SOUND_ENABLED = true;
 	
 	public static final String APP_DIR_PATH = System.getenv("AppData") + File.separator + "Wally";
 	public static final String SETTINGS_FILE_PATH = APP_DIR_PATH + File.separator + "settings.json";
@@ -139,6 +141,14 @@ public class SettingsManager {
 		return getSeconds(min, unit);
 	}
 	
+	/**
+	 * Returns the "sound_on" value from the app's local settings file.
+	 * @return
+	 */
+	public boolean isSoundEnabled() {
+		return mSettingsObj.getBoolean(KEY_SOUND_ENABLED);
+	}
+	
 	
 	// Private methods
 	
@@ -152,6 +162,7 @@ public class SettingsManager {
 		toWrite.put(KEY_MAX_INTERVAL_UNIT, DEFAULT_MAX_INTERVAL_UNIT);
 		toWrite.put(KEY_SHOWN_PATHS_LIST, new JSONArray());
 		toWrite.put(KEY_LAST_SHOWN_PATH, DEFAULT_LAST_SHOWN_PATH);
+		toWrite.put(KEY_SOUND_ENABLED, DEFAULT_SOUND_ENABLED);
 		
 		// Create the app's local storage directory if it doesn't exist
 		try {
