@@ -60,9 +60,8 @@ public class Arpeggiator {
 	};
 	
 	
-	// Public methods
-	
-	public void play() {
+	// Constructor
+	public Arpeggiator() {
 		// Build the array of URLs of audio resources
 		mUrls = new URL[8];
 		mUrls[0] = Application.class.getResource("/res/audio/0-G#4.wav");
@@ -73,7 +72,12 @@ public class Arpeggiator {
 		mUrls[5] = Application.class.getResource("/res/audio/5-C6.wav");
 		mUrls[6] = Application.class.getResource("/res/audio/6-D#6.wav");
 		mUrls[7] = Application.class.getResource("/res/audio/7-G6.wav");
-		
+	}
+	
+	
+	// Public methods
+	
+	public void play() {		
 		// Pick a random number of notes between MIN_NOTES (inclusive) and MAX_NOTES (inclusive)
 		mNumNotes = mRandy.nextInt(MAX_NOTES - MIN_NOTES + 1) + MIN_NOTES;
 		System.out.println("mNumNotes: " + mNumNotes);
